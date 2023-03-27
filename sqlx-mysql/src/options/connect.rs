@@ -54,12 +54,12 @@ impl ConnectOptions for MySqlConnectOptions {
                     r#"SET sql_mode=(SELECT CONCAT(@@sql_mode, ',NO_ENGINE_SUBSTITUTION')),"#,
                 );
             }
-            options.push_str(r#"time_zone='+00:00',"#);
-            options.push_str(&format!(
-                r#"NAMES {} COLLATE {};"#,
-                conn.stream.charset.as_str(),
-                conn.stream.collation.as_str()
-            ));
+            options.push_str(r#"time_zone='+00:00';"#);
+            // options.push_str(&format!(
+            //     r#"NAMES {} COLLATE {};"#,
+            //     conn.stream.charset.as_str(),
+            //     conn.stream.collation.as_str()
+            // ));
 
             conn.execute(&*options).await?;
 
